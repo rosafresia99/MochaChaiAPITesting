@@ -17,8 +17,8 @@ This project is designed to automate the testing of the API endpoints for Kasir 
 ### Installation
 1. Clone the repository:
     ```sh
-    git clone https://github.com/yourusername/AutomationAPI.git
-    cd AutomationAPI
+    git clone https://github.com/yourusername/MochaChaiAPITesting.git
+    cd MochaChaiAPITesting
     ```
 
 2. Install the dependencies:
