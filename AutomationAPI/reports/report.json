@@ -1,0 +1,315 @@
+{
+  "stats": {
+    "suites": 3,
+    "tests": 8,
+    "passes": 8,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-07-21T11:14:51.174Z",
+    "end": "2024-07-21T11:14:57.467Z",
+    "duration": 6293,
+    "testsRegistered": 8,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "d63f09d5-b500-4e61-8558-0dba03a8e359",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "ee95da29-6c37-4064-9d9a-b7dbab4d16c4",
+          "title": "Authorization",
+          "fullFile": "/Users/rossaafresiasiagian/Documents/AutomationTest/Sanbercode/AutomationAPI/test/auth.test.js",
+          "file": "/test/auth.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should register a new user",
+              "fullTitle": "Authorization should register a new user",
+              "timedOut": false,
+              "duration": 978,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await supertest.default(config.baseUrl)\n    .post('/registration')\n    .send({\n        name: config.credentials.name,\n        email: config.credentials.email,\n        password: config.credentials.password\n    })\n    .expect(201);\nconsole.log('Registration response:', response.body); // Debug log\nexpect(response.body.status).to.equal('success');\nexpect(response.body.data).to.have.property('name', config.credentials.name);",
+              "err": {},
+              "uuid": "551f9be0-0010-4b4e-9c94-2ffd6d12188a",
+              "parentUUID": "ee95da29-6c37-4064-9d9a-b7dbab4d16c4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should login and get tokens",
+              "fullTitle": "Authorization should login and get tokens",
+              "timedOut": false,
+              "duration": 666,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await supertest.default(config.baseUrl)\n    .post('/authentications')\n    .send({\n        email: config.credentials.email,\n        password: config.credentials.password\n    });\nconsole.log('Login response:', response.body); // Debug log\nexpect(response.status).to.equal(201);\nexpect(response.body.status).to.equal('success');\naccessToken = response.body.data.accessToken;\nrefreshToken = response.body.data.refreshToken;\nexpect(accessToken).to.be.a('string');\nexpect(refreshToken).to.be.a('string');",
+              "err": {},
+              "uuid": "e46778ed-1bec-4973-8fd0-4d4d044f1dcc",
+              "parentUUID": "ee95da29-6c37-4064-9d9a-b7dbab4d16c4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "551f9be0-0010-4b4e-9c94-2ffd6d12188a",
+            "e46778ed-1bec-4973-8fd0-4d4d044f1dcc"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 1644,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        },
+        {
+          "uuid": "61c561cc-4ff6-4ee8-a881-6a09170d0e7f",
+          "title": "Category CRUD Operations",
+          "fullFile": "/Users/rossaafresiasiagian/Documents/AutomationTest/Sanbercode/AutomationAPI/test/category.test.js",
+          "file": "/test/category.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"Category CRUD Operations\"",
+              "fullTitle": "Category CRUD Operations \"before all\" hook in \"Category CRUD Operations\"",
+              "timedOut": false,
+              "duration": 2003,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "this.timeout(10000); // Tambahkan timeout 10 detik untuk hook ini\n// Tunggu hingga token tersedia\nawait new Promise((resolve) => setTimeout(resolve, 2000));",
+              "err": {},
+              "uuid": "dd5b67c0-f333-42dd-99ec-d014b523d011",
+              "parentUUID": "61c561cc-4ff6-4ee8-a881-6a09170d0e7f",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should create a new category",
+              "fullTitle": "Category CRUD Operations should create a new category",
+              "timedOut": false,
+              "duration": 187,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "this.timeout(10000); // Tambahkan timeout 10 detik untuk tes ini\nconst response = await supertest(config.baseUrl)\n    .post('/categories')\n    .set('Authorization', `Bearer ${accessToken}`)\n    .send({\n        name: 'makanan ringan',\n        description: 'makanan ringan dari indofood'\n    })\n    .expect(201);\nexpect(response.body.status).to.equal('success');\ncategoryId = response.body.data.categoryId;\nsetCategoryId(categoryId);\nexpect(categoryId).to.be.a('string');",
+              "err": {},
+              "uuid": "49441427-5d7d-4e09-b27e-3d1b018da599",
+              "parentUUID": "61c561cc-4ff6-4ee8-a881-6a09170d0e7f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should get category detail",
+              "fullTitle": "Category CRUD Operations should get category detail",
+              "timedOut": false,
+              "duration": 100,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "this.timeout(10000); // Tambahkan timeout 10 detik untuk tes ini\nconst response = await supertest(config.baseUrl)\n    .get(`/categories/${categoryId}`)\n    .set('Authorization', `Bearer ${accessToken}`)\n    .expect(200);\n// Tambahkan log untuk melihat respons yang diterima\nconsole.log(response.body);\nexpect(response.body.status).to.equal('success');\nexpect(response.body.data.category).to.have.property('name', 'makanan ringan');",
+              "err": {},
+              "uuid": "ef532abb-a8a8-49f1-b16b-574a4c4164ea",
+              "parentUUID": "61c561cc-4ff6-4ee8-a881-6a09170d0e7f",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should update category",
+              "fullTitle": "Category CRUD Operations should update category",
+              "timedOut": false,
+              "duration": 61,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "this.timeout(10000); // Tambahkan timeout 10 detik untuk tes ini\nconst response = await supertest(config.baseUrl)\n    .put(`/categories/${categoryId}`)\n    .set('Authorization', `Bearer ${accessToken}`)\n    .send({ name: 'minuman ringan', description: 'minuman ringan dari indofood' })\n    .expect(200);\nconsole.log(response.body);\nexpect(response.body.status).to.equal('success');\nexpect(response.body.data).to.have.property('name', 'minuman ringan');",
+              "err": {},
+              "uuid": "340776af-c4e4-4033-b952-9f7adfc556b4",
+              "parentUUID": "61c561cc-4ff6-4ee8-a881-6a09170d0e7f",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "49441427-5d7d-4e09-b27e-3d1b018da599",
+            "ef532abb-a8a8-49f1-b16b-574a4c4164ea",
+            "340776af-c4e4-4033-b952-9f7adfc556b4"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 348,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        },
+        {
+          "uuid": "a630a13a-430b-44c7-ad9d-626ac02432cf",
+          "title": "Product CRUD Operations",
+          "fullFile": "/Users/rossaafresiasiagian/Documents/AutomationTest/Sanbercode/AutomationAPI/test/product.test.js",
+          "file": "/test/product.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"Product CRUD Operations\"",
+              "fullTitle": "Product CRUD Operations \"before all\" hook in \"Product CRUD Operations\"",
+              "timedOut": false,
+              "duration": 2001,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "this.timeout(10000); // Tambahkan timeout 10 detik untuk hook ini\n// Tunggu hingga token dan categoryId tersedia\nawait new Promise((resolve) => setTimeout(resolve, 2000));\nconsole.log('Category ID:', categoryId); // Verifikasi categoryId",
+              "err": {},
+              "uuid": "d7a26bde-ad85-467c-854d-14f75a254fb6",
+              "parentUUID": "a630a13a-430b-44c7-ad9d-626ac02432cf",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should create a new product",
+              "fullTitle": "Product CRUD Operations should create a new product",
+              "timedOut": false,
+              "duration": 150,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await supertest(config.baseUrl)\n    .post('/products')\n    .set('Authorization', `Bearer ${accessToken}`)\n    .send({\n        category_id: categoryId,\n        code: 'A314ASDDFIER3432',\n        name: 'taro',\n        price: '3500',\n        cost: '3000',\n        stock: '5'\n    })\n    .expect(201);\nexpect(response.body.status).to.equal('success');\nproductId = response.body.data.productId;\nsetProductId(productId);\nexpect(productId).to.be.a('string');",
+              "err": {},
+              "uuid": "96ac6e49-5622-4f94-ba8b-b8ed93f3d569",
+              "parentUUID": "a630a13a-430b-44c7-ad9d-626ac02432cf",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should get product detail",
+              "fullTitle": "Product CRUD Operations should get product detail",
+              "timedOut": false,
+              "duration": 65,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await supertest(config.baseUrl)\n    .get(`/products/${productId}`)\n    .set('Authorization', `Bearer ${accessToken}`)\n    .expect(200);\nexpect(response.body.status).to.equal('success');\nexpect(response.body.data.product).to.have.property('code', 'A314ASDDFIER3432');",
+              "err": {},
+              "uuid": "a55e7fb4-e4e9-423d-bd49-64609dac78bb",
+              "parentUUID": "a630a13a-430b-44c7-ad9d-626ac02432cf",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should update product",
+              "fullTitle": "Product CRUD Operations should update product",
+              "timedOut": false,
+              "duration": 72,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await supertest(config.baseUrl)\n    .put(`/products/${productId}`)\n    .set('Authorization', `Bearer ${accessToken}`)\n    .send({\n        category_id: categoryId,\n        code: 'A314ASDDFIER3432',\n        name: 'taro updated',\n        price: '4500',\n        cost: '4000',\n        stock: '10'\n    })\n    .expect(200);\nexpect(response.body.status).to.equal('success');\nexpect(response.body.data).to.have.property('name', 'taro updated');",
+              "err": {},
+              "uuid": "c1779cf0-019d-42ae-b689-6e8272b154c5",
+              "parentUUID": "a630a13a-430b-44c7-ad9d-626ac02432cf",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "96ac6e49-5622-4f94-ba8b-b8ed93f3d569",
+            "a55e7fb4-e4e9-423d-bd49-64609dac78bb",
+            "c1779cf0-019d-42ae-b689-6e8272b154c5"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 287,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 10000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.6.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "report",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "reports",
+        "reportFilename": "report",
+        "overwrite": "false"
+      },
+      "version": "6.2.0"
+    }
+  }
+}

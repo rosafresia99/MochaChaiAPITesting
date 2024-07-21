@@ -1,0 +1,275 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 8,
+    "passes": 8,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-07-21T02:10:18.360Z",
+    "end": "2024-07-21T02:10:23.415Z",
+    "duration": 5055,
+    "testsRegistered": 8,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "cb6b8eae-8964-4550-befb-1808d9148489",
+      "title": "",
+      "fullFile": "",
+      "file": "",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "60e20717-62b1-469f-be34-21d6fda73271",
+          "title": "Authorization",
+          "fullFile": "/Users/rossaafresiasiagian/Documents/AutomationTest/Sanbercode/AutomationAPI/test/user.test.js",
+          "file": "/test/user.test.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should register a new user",
+              "fullTitle": "Authorization should register a new user",
+              "timedOut": false,
+              "duration": 982,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await supertest.default(config.baseUrl)\n    .post('/registration')\n    .send({\n        name: config.credentials.name,\n        email: config.credentials.email,\n        password: config.credentials.password\n    })\n    .expect(201);\nconsole.log('Registration response:', response.body); // Debug log\nexpect(response.body.status).to.equal('success');\nexpect(response.body.data).to.have.property('name', config.credentials.name);",
+              "err": {},
+              "uuid": "19cca950-489b-4648-a1d6-28a47f902905",
+              "parentUUID": "60e20717-62b1-469f-be34-21d6fda73271",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should login and get tokens",
+              "fullTitle": "Authorization should login and get tokens",
+              "timedOut": false,
+              "duration": 1010,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await supertest.default(config.baseUrl)\n    .post('/authentications')\n    .send({\n        email: config.credentials.email,\n        password: config.credentials.password\n    });\nconsole.log('Login response:', response.body); // Debug log\nexpect(response.status).to.equal(201);\nexpect(response.body.status).to.equal('success');\naccessToken = response.body.data.accessToken;\nrefreshToken = response.body.data.refreshToken;\nexpect(accessToken).to.be.a('string');\nexpect(refreshToken).to.be.a('string');",
+              "err": {},
+              "uuid": "2ee3803e-5393-4c15-a193-9c2ff6fe2cd6",
+              "parentUUID": "60e20717-62b1-469f-be34-21d6fda73271",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should refresh token",
+              "fullTitle": "Authorization should refresh token",
+              "timedOut": false,
+              "duration": 64,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await supertest.default(config.baseUrl)\n    .put('/authentications')\n    .set('Authorization', `Bearer ${accessToken}`)\n    .send({ refreshToken });\nconsole.log('Refresh token response:', response.body); // Debug log\nexpect(response.status).to.equal(200);\nexpect(response.body.status).to.equal('success');\naccessToken = response.body.data.accessToken;\nexpect(accessToken).to.be.a('string');",
+              "err": {},
+              "uuid": "003ca0f3-3f89-49bb-81e0-cf393b977797",
+              "parentUUID": "60e20717-62b1-469f-be34-21d6fda73271",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should logout",
+              "fullTitle": "Authorization should logout",
+              "timedOut": false,
+              "duration": 65,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await supertest.default(config.baseUrl)\n    .delete('/authentications')\n    .set('Authorization', `Bearer ${accessToken}`)\n    .send({ refreshToken });\nconsole.log('Logout response:', response.body); // Debug log\nexpect(response.status).to.equal(200);\nexpect(response.body.status).to.equal('success');",
+              "err": {},
+              "uuid": "e49761df-2f8e-4254-8a03-6f9db431341d",
+              "parentUUID": "60e20717-62b1-469f-be34-21d6fda73271",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "19cca950-489b-4648-a1d6-28a47f902905",
+            "2ee3803e-5393-4c15-a193-9c2ff6fe2cd6",
+            "003ca0f3-3f89-49bb-81e0-cf393b977797",
+            "e49761df-2f8e-4254-8a03-6f9db431341d"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 2121,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        },
+        {
+          "uuid": "3747bb93-3e1c-45d8-b2ab-cc6245ad04f4",
+          "title": "User CRUD Operations",
+          "fullFile": "/Users/rossaafresiasiagian/Documents/AutomationTest/Sanbercode/AutomationAPI/test/user.test.js",
+          "file": "/test/user.test.js",
+          "beforeHooks": [
+            {
+              "title": "\"before all\" hook in \"User CRUD Operations\"",
+              "fullTitle": "User CRUD Operations \"before all\" hook in \"User CRUD Operations\"",
+              "timedOut": false,
+              "duration": 2002,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "// Tunggu hingga token tersedia\nawait new Promise((resolve) => setTimeout(resolve, 2000));",
+              "err": {},
+              "uuid": "77fa36da-1ef0-49ad-9925-ae89bc15dd05",
+              "parentUUID": "3747bb93-3e1c-45d8-b2ab-cc6245ad04f4",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "should create a new user",
+              "fullTitle": "User CRUD Operations should create a new user",
+              "timedOut": false,
+              "duration": 732,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await supertest.default(config.baseUrl)\n    .post('/users')\n    .set('Authorization', `Bearer ${accessToken}`)\n    .send({\n        name: 'kasir-serbaguna',\n        email: 'kasir@example.com',\n        password: 'kasir123@'\n    })\n    .expect(201);\nexpect(response.body.status).to.equal('success');\nuserId = response.body.data.userId;\nexpect(userId).to.be.a('string');",
+              "err": {},
+              "uuid": "889ccbd6-e09a-4aaa-9689-4172c106c508",
+              "parentUUID": "3747bb93-3e1c-45d8-b2ab-cc6245ad04f4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should get user detail",
+              "fullTitle": "User CRUD Operations should get user detail",
+              "timedOut": false,
+              "duration": 62,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await supertest.default(config.baseUrl)\n    .get(`/users/${userId}`)\n    .set('Authorization', `Bearer ${accessToken}`)\n    .expect(200);\nexpect(response.body.status).to.equal('success');\nexpect(response.body.data.user).to.have.property('id', userId);",
+              "err": {},
+              "uuid": "7d93bbef-77ae-4f0f-9483-50ddb0059a23",
+              "parentUUID": "3747bb93-3e1c-45d8-b2ab-cc6245ad04f4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should update user",
+              "fullTitle": "User CRUD Operations should update user",
+              "timedOut": false,
+              "duration": 61,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await supertest.default(config.baseUrl)\n    .put(`/users/${userId}`)\n    .set('Authorization', `Bearer ${accessToken}`)\n    .send({ name: 'updated-user', email: 'updated@example.com' })\n    .expect(200);\nexpect(response.body.status).to.equal('success');\nexpect(response.body.data).to.have.property('name', 'updated-user');",
+              "err": {},
+              "uuid": "93d59e74-bff8-4e12-9a6e-e7d2ef075d11",
+              "parentUUID": "3747bb93-3e1c-45d8-b2ab-cc6245ad04f4",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should delete user",
+              "fullTitle": "User CRUD Operations should delete user",
+              "timedOut": false,
+              "duration": 65,
+              "state": "passed",
+              "speed": "medium",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const response = await supertest.default(config.baseUrl)\n    .delete(`/users/${userId}`)\n    .set('Authorization', `Bearer ${accessToken}`)\n    .expect(200);\nexpect(response.body.status).to.equal('success');",
+              "err": {},
+              "uuid": "ed1e4862-147c-49a6-9718-6be4989209e2",
+              "parentUUID": "3747bb93-3e1c-45d8-b2ab-cc6245ad04f4",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "889ccbd6-e09a-4aaa-9689-4172c106c508",
+            "7d93bbef-77ae-4f0f-9483-50ddb0059a23",
+            "93d59e74-bff8-4e12-9a6e-e7d2ef075d11",
+            "ed1e4862-147c-49a6-9718-6be4989209e2"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 920,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 10000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 10000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.6.0"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "index",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "report",
+        "reportFilename": "index"
+      },
+      "version": "6.2.0"
+    }
+  }
+}
