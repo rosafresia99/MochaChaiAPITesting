@@ -1,7 +1,5 @@
 # MochaChaiAPITesting
 
-# AutomationAPI Test Project
-
 ## Table of Contents
 - [Introduction](#introduction)
 - [Setup](#setup)
